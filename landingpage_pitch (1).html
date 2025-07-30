@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Creator Camp for Kids | Labdox</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Swipe Widget (if needed, otherwise can be removed) -->
+    <script src="https://cdn.swipepages.com/js/swipe.js"></script>
+    <style>
+        /* Custom CSS Variables */
+        :root {
+            --primary: #2575fc;
+            --secondary: #6a11cb;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --accent: #ff6b6b;
+        }
+        
+        /* Dark Theme Styles */
+        [data-bs-theme="dark"] {
+            --bs-body-bg: #212529;
+            --bs-body-color: #f8f9fa;
+            --bs-dark: #f8f9fa;
+            --bs-light: #212529;
+            --bs-card-bg: #2c3034; /* Darker card background */
+            --bs-card-color: #f8f9fa; /* Lighter text on dark cards */
+            --bs-accordion-bg: #2c3034;
+            --bs-accordion-color: #f8f9fa;
+            --bs-accordion-button-color: #f8f9fa;
+            --bs-accordion-button-active-bg: #3a3f44;
+            --bs-accordion-border-color: rgba(255,255,255,0.1);
+            --bs-form-control-bg: #3a3f44;
+            --bs-form-control-color: #f8f9fa;
+            --bs-form-control-border-color: rgba(255,255,255,0.2);
+            --bs-form-select-bg: #3a3f44;
+            --bs-form-select-color: #f8f9fa;
+            --bs-form-select-border-color: rgba(255,255,255,0.2);
+            --bs-list-group-bg: #2c3034;
+            --bs-list-group-color: #f8f9fa;
+            --bs-list-group-border-color: rgba(255,255,255,0.1);
+            --bs-success-bg-subtle: #198754; /* Darker success message */
+            --bs-success-text-emphasis: #d4edda; /* Lighter text for success */
+        }
+        
+        /* Base Body Styles */
+        body {
+            font-family: 'Inter', sans-serif; /* Changed font to Inter */
+            padding-top: 70px;
+            transition: all 0.3s ease;
+            background-color: var(--bs-body-bg);
+            color: var(--bs-body-color);
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+        }
+        
+        [data-bs-theme="dark"] .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        /* Hero Section Styles */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Section Title Styles */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding-bottom: 15px; /* Added padding for underline */
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0; /* Changed to 0 */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px; /* Rounded corners for underline */
+        }
+        
+        /* Card Styles */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 12px;
+            background-color: var(--bs-card-bg); /* Use theme variable */
+            color: var(--bs-card-color); /* Use theme variable */
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Stronger shadow on hover */
+        }
+        
+        [data-bs-theme="dark"] .card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4); /* Stronger shadow for dark theme */
+        }
+        
+        /* Primary Button Styles */
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Stronger shadow on hover */
+            opacity: 0.9;
+        }
+
+        .btn-outline-light {
+            border-color: rgba(255,255,255,0.5);
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-light:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Theme Toggle Button */
+        .theme-toggle {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1.2rem;
+            color: white;
+            transition: transform 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Countdown Box (if used) */
+        .countdown-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin: 0 5px;
+            min-width: 80px;
+        }
+        
+        /* Feature Image Styles */
+        .feature-img {
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-img:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Testimonial Image (if used) */
+        .testimonial-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+        
+        /* Swipe Keyword (if used) */
+        .swipe-keyword {
+            background-color: var(--accent);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        /* Swipe Section Styles */
+        .swipe-section {
+            background-color: rgba(106, 17, 203, 0.05);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        /* Registration Form Styles */
+        .registration-form {
+            background-color: var(--bs-card-bg); /* Use theme variable */
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: 2rem auto;
+            max-width: 800px;
+            border: 1px solid rgba(0,0,0,0.05); /* Subtle border */
+        }
+
+        [data-bs-theme="dark"] .registration-form {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Content Display Section */
+        .content-display {
+            margin: 2rem auto;
+            max-width: 1000px;
+            padding: 2rem;
+            background-color: var(--bs-card-bg); /* Use theme variable */
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05); /* Subtle border */
+        }
+
+        [data-bs-theme="dark"] .content-display {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--bs-body-color);
+        }
+
+        .form-select, .form-control {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--bs-form-control-border-color); /* Use theme variable */
+            background-color: var(--bs-form-control-bg); /* Use theme variable */
+            color: var(--bs-form-control-color); /* Use theme variable */
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus, .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(37, 117, 252, 0.25);
+        }
+
+        .submit-btn {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative; /* For ripple effect */
+            overflow: hidden; /* For ripple effect */
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            animation: ripple-effect 0.6s linear;
+            transform: scale(0);
+            opacity: 1;
+        }
+
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .success-message {
+            display: none;
+            padding: 1rem;
+            background-color: var(--bs-success-bg-subtle); /* Use theme variable */
+            color: var(--bs-success-text-emphasis); /* Use theme variable */
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(25, 135, 84, 0.5); /* Subtle border for success */
+        }
+        
+        /* Trust section styles */
+        .trust-section {
+            background-color: rgba(37, 117, 252, 0.05);
+            padding: 4rem 0;
+            border-radius: 12px;
+        }
+        
+        .trust-badge {
+            background: var(--bs-card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            border: 1px solid rgba(0,0,0,0.05); /* Subtle border */
+        }
+
+        [data-bs-theme="dark"] .trust-badge {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .trust-badge.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .trust-badge:hover {
+            transform: translateY(-8px) !important; /* More pronounced lift */
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2); /* Stronger shadow */
+        }
+        
+        .trust-icon {
+            font-size: 2.8rem; /* Slightly larger icon */
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Accordion Styles */
+        .accordion-item {
+            border: 1px solid var(--bs-accordion-border-color);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: var(--bs-accordion-bg);
+            color: var(--bs-accordion-color);
+            transition: all 0.3s ease;
+        }
+
+        .accordion-button {
+            background-color: var(--bs-accordion-bg);
+            color: var(--bs-accordion-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: var(--bs-accordion-button-active-bg);
+            color: var(--bs-accordion-button-color);
+            box-shadow: inset 0 -1px 0 rgba(0,0,0,0.125);
+        }
+
+        .accordion-body {
+            background-color: var(--bs-accordion-bg);
+            color: var(--bs-accordion-color);
+        }
+        
+        /* Animation classes */
+        .animate-delay-1 { animation-delay: 0.2s; }
+        .animate-delay-2 { animation-delay: 0.4s; }
+        .animate-delay-3 { animation-delay: 0.6s; }
+        .animate-delay-4 { animation-delay: 0.8s; }
+        .animate-delay-5 { animation-delay: 1.0s; }
+        .animate-delay-6 { animation-delay: 1.2s; }
+        
+        /* Floating animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+            will-change: transform;
+        }
+        
+        /* Pulse animation for CTA */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 117, 252, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 117, 252, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 117, 252, 0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+            will-change: transform, box-shadow;
+        }
+
+        /* Bounce on hover for buttons */
+        .btn-bounce:hover {
+            animation: bounce 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Shake animation for invalid input */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .shake-animation {
+            animation: shake 0.5s;
+            border-color: var(--bs-danger) !important;
+        }
+
+        /* Custom Modal Styles */
+        .custom-modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1050; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .custom-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .custom-modal-content {
+            background-color: var(--bs-card-bg);
+            margin: auto;
+            padding: 0; /* Removed padding to let header/footer control it */
+            border: 1px solid #888;
+            width: 90%; /* Increased width for better mobile view */
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+            transform: translateY(-50px); /* Initial state for animation */
+            opacity: 0; /* Initial state for animation */
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+        }
+
+        .custom-modal.show .custom-modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        @keyframes animatetop {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1}
+        }
+
+        .custom-modal-header {
+            padding: 15px 20px; /* Adjusted padding */
+            background-color: var(--primary);
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .custom-modal-body {
+            padding: 20px 20px; /* Adjusted padding */
+            color: var(--bs-body-color);
+        }
+
+        .custom-modal-footer {
+            padding: 15px 20px; /* Adjusted padding */
+            text-align: right;
+            border-top: 1px solid var(--bs-accordion-border-color); /* Use theme variable */
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .custom-close-button {
+            color: #fff; /* White color for close button */
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .custom-close-button:hover,
+        .custom-close-button:focus {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+        }
+
+        /* Testimonial Carousel Customization */
+        .testimonial-card-new {
+            background-color: var(--bs-card-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin: 0 auto;
+            max-width: 700px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        [data-bs-theme="dark"] .testimonial-card-new {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .testimonial-quote p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: var(--primary);
+            border-radius: 50%;
+            padding: 15px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 4rem 0 2rem;
+            }
+            
+            .countdown-box {
+                min-width: 60px;
+                padding: 10px;
+            }
+
+            .custom-modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+    <style>
+        /* Chat Bot Styles */
+        .chatbot-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1100;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .chatbot-fab:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+            transform: scale(1.07);
+        }
+        .chatbot-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            max-width: 95vw;
+            height: 480px;
+            max-height: 80vh;
+            background: var(--bs-card-bg);
+            color: var(--bs-card-color);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .chatbot-panel.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            padding: 16px 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .chatbot-header .close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .chatbot-header .close-btn:hover {
+            color: #ffd700;
+        }
+        .chatbot-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            background: var(--bs-card-bg);
+        }
+        .chatbot-message {
+            margin-bottom: 14px;
+            display: flex;
+            align-items: flex-end;
+        }
+        .chatbot-message.user .bubble {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #fff;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        .chatbot-message.bot .bubble {
+            background: #e9ecef;
+            color: var(--bs-dark);
+            align-self: flex-start;
+            margin-right: auto;
+        }
+        [data-bs-theme="dark"] .chatbot-message.bot .bubble {
+            background: #333a40;
+            color: #fff;
+        }
+        .bubble {
+            padding: 10px 16px;
+            border-radius: 18px;
+            max-width: 80%;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .chatbot-input-area {
+            display: flex;
+            padding: 12px 16px;
+            background: var(--bs-card-bg);
+            border-top: 1px solid var(--bs-accordion-border-color);
+        }
+        .chatbot-input {
+            flex: 1;
+            border: 1px solid var(--bs-form-control-border-color);
+            border-radius: 16px;
+            padding: 10px 14px;
+            font-size: 1rem;
+            background: var(--bs-form-control-bg);
+            color: var(--bs-form-control-color);
+            outline: none;
+            transition: border 0.2s;
+        }
+        .chatbot-input:focus {
+            border-color: var(--primary);
+        }
+        .chatbot-send-btn {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .chatbot-send-btn:hover {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+        }
+        @media (max-width: 600px) {
+            .chatbot-panel {
+                right: 5vw;
+                width: 98vw;
+                min-width: 0;
+                height: 70vh;
+                bottom: 80px;
+            }
+        }
+    </style>
+</head>
+<body data-bs-theme="light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container justify-content-center">
+            <a class="navbar-brand mx-auto d-flex align-items-center justify-content-center" href="#">
+                <img src="https://media.swipepages.com/2025/6/60b08f41c06b2b00106e0a72/logo.png" alt="Labdox Logo" height="30" class="d-block mx-auto">
+            </a>
+            <!-- Theme Toggle Button -->
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="about">
+        <div class="container text-center hero-content">
+            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">The AI + Core Human Skills Summer Camp</h1>
+            <p class="lead mb-5 animate__animated animate__fadeIn animate__delay-1s">In just 2 days, your child will build real projects, present with confidence, and create something they'll never forget.</p>
+            <div class="d-flex justify-content-center gap-3 animate__animated animate__fadeIn animate__delay-2s">
+                <a href="#registration" class="btn btn-light btn-lg px-4 me-2 fw-bold pulse animate__animated animate__infinite btn-bounce">Check Content</a>
+                <a href="https://academy.labdox.com/AI_summer_camp_july2025" class="btn btn-outline-light btn-lg px-4 animate__animated animate__fadeInUp animate-delay-3s btn-bounce" target="_blank" rel="noopener">Learn More</a>
+            </div>
+            <div class="mt-5 animate__animated animate__zoomIn animate__delay-3s">
+                <div style="max-width: 350px; margin: 0 auto;">
+                    <div class="ratio ratio-4x3 floating">
+                        <iframe 
+                            src="https://www.youtube.com/embed/ES5XsidZ2Jk?autoplay=1&loop=1&playlist=ES5XsidZ2Jk&mute=1" 
+                            title="YouTube video" 
+                            allow="autoplay" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Registration Form Section -->
+    <section class="container my-5" id="registration">
+      <div class="registration-form animate__animated animate__fadeInUp">
+        <h2 class="text-center mb-4 animate__animated animate__fadeInDown">Check your Interest</h2>
+        <div class="success-message animate__animated animate__fadeIn" id="successMessage">
+          The content you requested is displayed below.
+        </div>
+        <form id="campRegistrationForm">
+          <div class="mb-3 animate__animated animate__fadeInLeft animate-delay-1">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" required>
+          </div>
+          <div class="mb-3 animate__animated animate__fadeInRight animate-delay-2">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
+          <div class="mb-3 animate__animated animate__fadeInLeft animate-delay-3">
+            <label for="contact" class="form-label">Contact Number</label>
+            <input type="tel" class="form-control" id="contact" pattern="[0-9]{10,15}" maxlength="15" required>
+          </div>
+          <div class="mb-4 animate__animated animate__fadeInRight animate-delay-4">
+            <label for="section" class="form-label">Which section would you like to see?</label>
+            <select class="form-select" id="section" required>
+              <option value="" selected disabled>Select a section</option>
+              <option value="curriculum">Curriculum</option>
+              <option value="projects">Projects</option>
+              <option value="testimonials">Testimonials</option>
+              <option value="faq">FAQ</option>
+              <option value="trust">Why Trust Labdox</option>
+              <option value="swipe">Exclusive Offer </option>
+            </select>
+          </div>
+          <div class="text-center animate__animated animate__zoomIn animate-delay-5">
+            <button type="submit" class="submit-btn animate__animated animate__pulse animate__infinite animate__slow">View Content</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Content Display Section (will be populated dynamically) -->
+    <section class="container my-5" id="contentDisplay">
+        <div class="content-display" id="dynamicContent">
+            <!-- Content will be loaded here after form submission -->
+            <div class="text-center py-5 animate__animated animate__fadeIn">
+                <i class="bi bi-info-circle fs-1 text-muted floating"></i>
+                <h3 class="mt-3">Select a section to view content</h3>
+                <p class="text-muted">Please fill out the form above to see the content you're interested in.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Modal for Alerts -->
+    <div id="customAlertModal" class="custom-modal">
+        <div class="custom-modal-content">
+            <div class="custom-modal-header">
+                <h5 class="modal-title" id="customAlertModalTitle">Alert</h5>
+                <span class="custom-close-button" onclick="closeCustomAlert()">×</span>
+            </div>
+            <div class="custom-modal-body">
+                <p id="customAlertModalMessage"></p>
+            </div>
+            <div class="custom-modal-footer">
+                <button type="button" class="btn btn-primary" onclick="closeCustomAlert()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Custom Alert Function
+        function showCustomAlert(message, title = 'Alert') {
+            document.getElementById('customAlertModalTitle').innerText = title;
+            document.getElementById('customAlertModalMessage').innerText = message;
+            const modal = document.getElementById('customAlertModal');
+            modal.classList.add('show'); // Add 'show' class to trigger transitions
+        }
+
+        function closeCustomAlert() {
+            const modal = document.getElementById('customAlertModal');
+            modal.classList.remove('show'); // Remove 'show' class to trigger transitions
+            // Optional: Hide display after transition completes
+            setTimeout(() => { modal.style.display = 'none'; }, 300); 
+        }
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            body.setAttribute('data-bs-theme', 'dark');
+            if (themeToggle) { 
+                themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+            }
+        }
+        
+        if (themeToggle) { 
+            themeToggle.addEventListener('click', () => {
+                if (body.getAttribute('data-bs-bs-theme') === 'dark') {
+                    body.setAttribute('data-bs-theme', 'light');
+                    themeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.setAttribute('data-bs-theme', 'dark');
+                    themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        }
+
+        // Add ripple effect to submit button
+        document.querySelector('.submit-btn').addEventListener('click', function(e) {
+            const button = e.target;
+            const ripple = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            ripple.style.width = ripple.style.height = `${diameter}px`;
+            ripple.style.left = `${e.clientX - (button.getBoundingClientRect().left + radius)}px`;
+            ripple.style.top = `${e.clientY - (button.getBoundingClientRect().top + radius)}px`;
+            ripple.classList.add('ripple');
+
+            const existingRipple = button.getElementsByClassName('ripple')[0];
+            if (existingRipple) {
+                existingRipple.remove();
+            }
+            button.appendChild(ripple);
+        });
+
+
+        // Form submission handler
+        document.getElementById('campRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const contactInput = document.getElementById('contact');
+            const sectionSelect = document.getElementById('section');
+
+            const name = nameInput.value;
+            const email = emailInput.value;
+            const contact = contactInput.value; 
+            const section = sectionSelect.value;
+
+            // Simple validation with shake animation
+            let isValid = true;
+            if (!name) {
+                nameInput.classList.add('shake-animation');
+                isValid = false;
+            } else {
+                nameInput.classList.remove('shake-animation');
+            }
+            if (!email) {
+                emailInput.classList.add('shake-animation');
+                isValid = false;
+            } else {
+                emailInput.classList.remove('shake-animation');
+            }
+            if (!contact || !contact.match(/^[0-9]{10,15}$/)) { // Basic phone number validation
+                contactInput.classList.add('shake-animation');
+                isValid = false;
+            } else {
+                contactInput.classList.remove('shake-animation');
+            }
+            if (!section) {
+                sectionSelect.classList.add('shake-animation');
+                isValid = false;
+            } else {
+                sectionSelect.classList.remove('shake-animation');
+            }
+
+            if (!isValid) {
+                showCustomAlert('Please fill out all fields correctly.');
+                return;
+            }
+            
+            // Prepare data for Google Apps Script
+            const formData = {
+                name: name,
+                email: email,
+                contact: contact, 
+                section: section,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Send data to Google Apps Script
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbz4wIIHRCZSkRCyw9JS41Gp0zsU_v0wc6LK0TChnrmjsijNZvgSGZAFb8ioAFfJGAkMSA/exec'; 
+            
+            fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors', 
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                // Show success message
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+                successMessage.classList.add('animate__fadeIn');
+                
+                // Load the selected section content
+                loadSectionContent(section);
+                
+                // Scroll to the content display
+                setTimeout(() => {
+                    document.getElementById('contentDisplay').scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                // Fallback - still show content even if Google Sheets save fails
+                showCustomAlert('There was an issue submitting your registration, but we will still show you the content. Please try again later or contact support if the issue persists.', 'Submission Error');
+                loadSectionContent(section);
+                setTimeout(() => {
+                    document.getElementById('contentDisplay').scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+            });
+        });
+        
+        // Function to scroll to registration form
+        function scrollToRegistration() {
+            document.getElementById('registration').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Function to load section content dynamically
+        function loadSectionContent(section) {
+            const contentDiv = document.getElementById('dynamicContent');
+            
+            // Clear previous content and apply fadeOut for smooth transition
+            contentDiv.classList.remove('animate__fadeIn');
+            contentDiv.classList.add('animate__fadeOut');
+
+            setTimeout(() => {
+                contentDiv.innerHTML = ''; // Clear after fade out
+                let content = '';
+                
+                switch(section) {
+                    case 'curriculum':
+                        content = `
+                            <h2 class="section-title text-center animate__animated animate__fadeInDown">Curriculum</h2>
+                            <div class="row g-4">
+                                <div class="col-md-6 animate__animated animate__fadeInLeft animate-delay-1">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="bg-primary bg-opacity-10 p-3 rounded me-3">
+                                                    <i class="bi bi-robot fs-2 text-primary"></i>
+                                                </div>
+                                                <h3 class="mb-0">AI Basics</h3>
+                                            </div>
+                                            <p>Understand how AI works through fun, interactive projects like image recognition and simple chatbots.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 animate__animated animate__fadeInRight animate-delay-2">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="bg-primary bg-opacity-10 p-3 rounded me-3">
+                                                    <i class="bi bi-code-square fs-2 text-primary"></i>
+                                                </div>
+                                                <h3 class="mb-0">Creative Coding</h3>
+                                            </div>
+                                            <p>Build websites and simple apps without complex coding using block-based programming and AI tools.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 animate__animated animate__fadeInLeft animate-delay-3">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="bg-primary bg-opacity-10 p-3 rounded me-3">
+                                                    <i class="bi bi-lightbulb fs-2 text-primary"></i>
+                                                </div>
+                                                <h3 class="mb-0">Design Thinking</h3>
+                                            </div>
+                                            <p>Solve real problems with creative solutions using the same process tech companies use to build products.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 animate__animated animate__fadeInRight animate-delay-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="bg-primary bg-opacity-10 p-3 rounded me-3">
+                                                    <i class="bi bi-mic fs-2 text-primary"></i>
+                                                </div>
+                                                <h3 class="mb-0">Presentation Skills</h3>
+                                            </div>
+                                            <p>Learn to showcase projects with confidence in our final demo day where students present to parents.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-4 animate__animated animate__fadeInUp animate-delay-5">
+                                <a class="btn btn-primary btn-lg pulse animate__animated animate__infinite btn-bounce" href="https://link.labdox.com/AI-SC-Pay-1" target="_blank" rel="noopener">
+                                    <i class="bi bi-pencil-square me-2"></i>Register Now
+                                </a>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'projects':
+                        content = `
+                            <h2 class="section-title text-center animate__animated animate__fadeInDown">Sample Projects</h2>
+                            <div class="row">
+                                <div class="col-md-4 mb-4 animate__animated animate__zoomIn animate-delay-1">
+                                    <div class="card h-100">
+                                        <img src="https://media.swipepages.com/2025/6/60b08f41c06b2b00106e0a72/user-to-builder-u0txlq-300.jpg" class="card-img-top d-block mx-auto" alt="AI Art Generator" style="max-width: 100%; height: auto;">
+                                        <div class="card-body">
+                                            <h3>AI Art Generator</h3>
+                                            <p>Create stunning digital art using AI tools and learn how machine learning can be creative.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4 animate__animated animate__zoomIn animate-delay-2">
+                                    <div class="card h-100">
+                                        <img src="https://media.swipepages.com/2025/6/60b08f41c06b2b00106e0a72/creative-ai-6cg40s-300.jpg" class="card-img-top d-block mx-auto" alt="Personal Website" style="max-width: 100%; height: auto;">
+                                        <div class="card-body">
+                                            <h3>Personal Website</h3>
+                                            <p>Build and publish a personal portfolio site to showcase their projects and achievements.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4 animate__animated animate__zoomIn animate-delay-3">
+                                    <div class="card h-100">
+                                        <img src="https://media.swipepages.com/2025/6/60b08f41c06b2b00106e0a72/future-won-t-wait-300.png" class="card-img-top d-block mx-auto" alt="Smart Chatbot" style="max-width: 100%; height: auto;">
+                                        <div class="card-body">
+                                            <h3>Smart Chatbot</h3>
+                                            <p>Program a friendly AI assistant that can answer questions and have simple conversations.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center animate__animated animate__fadeInUp animate-delay-4">
+                                <a class="btn btn-primary btn-lg pulse animate__animated animate__infinite btn-bounce" href="https://link.labdox.com/AI-SC-Pay-1" target="_blank" rel="noopener">
+                                    <i class="bi bi-pencil-square me-2"></i>Register Now
+                                </a>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'testimonials':
+                        content = `
+                            <h2 class="section-title text-center animate__animated animate__fadeInDown">Testimonials</h2>
+                            <div id="testimonialCarousel" class="carousel slide animate__animated animate__fadeIn" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active animate__animated animate__fadeInUp">
+                                        <div class="testimonial-card-new text-center p-4">
+                                            <div class="testimonial-quote">
+                                                <i class="bi bi-quote fs-1 text-primary"></i>
+                                                <p class="mt-3 mb-2">
+                                                    "When I saw my child explain the bot he built, I knew he
+                                                    wasn't just learning — he was becoming a thinker."
+                                                </p>
+                                                <div class="testimonial-author text-muted">
+                                                    — A Parent from Vibgyor Workshop
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item animate__animated animate__fadeInUp">
+                                        <div class="testimonial-card-new text-center p-4">
+                                            <div class="testimonial-quote">
+                                                <i class="bi bi-quote fs-1 text-primary"></i>
+                                                <p class="mt-3 mb-2">
+                                                    "My daughter used to be shy, but after the camp, she confidently
+                                                    presented her AI project. It was amazing to see her transform!"
+                                                </p>
+                                                <div class="testimonial-author text-muted">
+                                                    — Happy Parent, Bangalore
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item animate__animated animate__fadeInUp">
+                                        <div class="testimonial-card-new text-center p-4">
+                                            <div class="testimonial-quote">
+                                                <i class="bi bi-quote fs-1 text-primary"></i>
+                                                <p class="mt-3 mb-2">
+                                                    "The blend of AI and human skills is brilliant. My son not only
+                                                    learned coding but also how to articulate his ideas."
+                                                </p>
+                                                <div class="testimonial-author text-muted">
+                                                    — Delighted Parent, Mumbai
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                            <div class="text-center mt-4 animate__animated animate__fadeInUp animate-delay-1">
+                                <a class="btn btn-primary btn-lg pulse animate__animated animate__infinite btn-bounce" href="https://link.labdox.com/AI-SC-Pay-1" target="_blank" rel="noopener">
+                                    <i class="bi bi-pencil-square me-2"></i>Register Now
+                                </a>
+                            </div>
+                        `;
+                        break;
+                    
+                    case 'faq':
+                        content = `
+                            <h2 class="section-title text-center animate__animated animate__fadeInDown">Frequently Asked Questions</h2>
+                            <div class="accordion" id="faqAccordion">
+                                <div class="accordion-item animate__animated animate__fadeInUp animate-delay-1">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            What age group is this camp for?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            This camp is designed for children aged 8-14. We tailor the content and projects to be engaging and accessible for this age range.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item animate__animated animate__fadeInUp animate-delay-2">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            What kind of AI projects will my child build?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            Children will work on hands-on projects such as AI art generators, simple chatbots, and personal websites, focusing on understanding AI concepts through practical application.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item animate__animated animate__fadeInUp animate-delay-3">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Is prior coding experience required?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            No prior coding experience is necessary. Our curriculum is designed to be beginner-friendly, using block-based programming and intuitive AI tools.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item animate__animated animate__fadeInUp animate-delay-4">
+                                    <h2 class="accordion-header" id="headingFour">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                            How will presentation skills be developed?
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            The camp culminates in a demo day where students present their projects to parents, fostering confidence and public speaking abilities.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-4 animate__animated animate__fadeInUp animate-delay-5">
+                                <a class="btn btn-primary btn-lg pulse animate__animated animate__infinite btn-bounce" href="https://link.labdox.com/AI-SC-Pay-1" target="_blank" rel="noopener">
+                                    <i class="bi bi-pencil-square me-2"></i>Register Now
+                                </a>
+                            </div>
+                        `;
+                        break;
+
+                    case 'trust':
+                        content = `
+                            <h2 class="section-title text-center animate__animated animate__fadeInDown">Why Parents Trust Labdox</h2>
+                            <div class="row g-4">
+                                <div class="col-md-3">
+                                    <div class="trust-badge animate__animated animate__fadeInUp animate-delay-1">
+                                        <div class="text-center">
+                                            <div class="trust-icon">
+                                                <i class="bi bi-award-fill"></i>
+                                            </div>
+                                            <h4>Certified Experts</h4>
+                                            <p>Our instructors are certified AI professionals with extensive teaching experience.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="trust-badge animate__animated animate__fadeInUp animate-delay-2">
+                                        <div class="text-center">
+                                            <div class="trust-icon">
+                                                <i class="bi bi-shield-check"></i>
+                                            </div>
+                                            <h4>Safety First</h4>
+                                            <p>All our programs follow strict child safety protocols and COPPA compliance.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="trust-badge animate__animated animate__fadeInUp animate-delay-3">
+                                        <div class="text-center">
+                                            <div class="trust-icon">
+                                                <i class="bi bi-people-fill"></i>
+                                            </div>
+                                            <h4>10,000+ Students</h4>
+                                            <p>Trusted by parents worldwide with a 97% satisfaction rate.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="trust-badge animate__animated animate__fadeInUp animate-delay-4">
+                                        <div class="text-center">
+                                            <div class="trust-icon">
+                                                <i class="bi bi-patch-check-fill"></i>
+                                            </div>
+                                            <h4>Recognized By</h4>
+                                            <p class="mt-3 text-center">
+                                                Contributors to programs at AICTE, IITs, and global startup summits. Led by SLP-certified experts.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-5">
+                                <div class="col-md-6 offset-md-3 animate__animated animate__fadeInLeft animate-delay-5">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h3 class="card-title"><i class="bi bi-star-fill text-warning me-2"></i>Trusted by India's Top Schools & Colleges</h3>
+                                            <div class="d-flex flex-wrap align-items-center justify-content-around mt-4">
+                                                <img src="https://labdoxcom.swipepages.media/2025/4/60b08f41c06b2b00106e0a72/nift_logo-svg-300.webp" onerror="this.onerror=null;this.src='https://placehold.co/100x40/cccccc/000000?text=NIFT';" alt="Partner 1" class="m-2 img-fluid" style="max-height:40px; width:auto;">
+                                                <img src="https://labdoxcom.swipepages.media/2025/4/60b08f41c06b2b00106e0a72/main-qimg-2f77f788f5dd67e52133595d1153522b-300.webp" onerror="this.onerror=null;this.src='https://placehold.co/100x40/cccccc/000000?text=Partner2';" alt="Partner 2" class="m-2 img-fluid" style="max-height:40px; width:auto;">
+                                                <img src="https://labdoxcom.swipepages.media/2025/4/60b08f41c06b2b00106e0a72/nitt_logo-300.webp" onerror="this.onerror=null;this.src='https://placehold.co/100x40/cccccc/000000?text=NITT';" alt="Partner 3" class="m-2 img-fluid" style="max-height:40px; width:auto;">
+                                                <img src="https://labdoxcom.swipepages.media/2025/4/60b08f41c06b2b00106e0a72/images--3-.webp" onerror="this.onerror=null;this.src='https://placehold.co/100x40/cccccc/000000?text=Partner4';" alt="Partner 4" class="m-2 img-fluid" style="max-height:40px; width:auto;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-5 animate__animated animate__fadeInUp animate-delay-6">
+                                <button type="button" class="btn btn-primary btn-lg animate__animated animate__pulse animate__infinite btn-bounce" onclick="scrollToRegistration()">
+                                    <i class="bi bi-rocket me-2"></i>Secure Your Spot Now
+                                </button>
+                            </div>
+                        `;
+                        break;
+                    case 'swipe': 
+                        content = `
+                            <h2 class="section-title text-center animate__animated animate__fadeInDown">Exclusive Offer </h2>
+                            <div class="row align-items-center">
+                                <div class="col-md-6 animate__animated animate__fadeInLeft animate-delay-1">
+                                    <h2>A Complete Future-Skills Starter Pack — All in One Day</h2>
+                                    <p>This exclusive offer is only available to Swipe community members.</p>
+                                    <ul class="list-group mb-3 animate__animated animate__fadeInUp animate-delay-2">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center animate__animated animate__fadeInRight animate-delay-3">
+                                            Live AI Workshop Access (6 hrs)
+                                            <span class="badge bg-primary rounded-pill">₹2,000</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center animate__animated animate__fadeInRight animate-delay-4">
+                                            AI Career Blueprint (PDF)
+                                            <span class="badge bg-primary rounded-pill">₹999</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center animate__animated animate__fadeInRight animate-delay-5">
+                                            Student Project Showcase
+                                            <span class="badge bg-primary rounded-pill">₹699</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center animate__animated animate__fadeInRight animate-delay-6">
+                                            Startup Tech Stack Access
+                                            <span class="badge bg-primary rounded-pill">₹1,500</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center animate__animated animate__fadeInRight animate-delay-7">
+                                            Invitation to Innovation Studio (First 20)
+                                            <span class="badge bg-primary rounded-pill">₹1,200</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center animate__animated animate__fadeInRight animate-delay-8">
+                                            Certificate of Participation
+                                            <span class="badge bg-primary rounded-pill">₹499</span>
+                                        </li>
+                                    </ul>
+                                    <div class="mb-2 animate__animated animate__fadeInUp animate-delay-9">
+                                        <strong>Total Value:</strong> <span class="text-decoration-line-through text-muted">₹6,897</span>
+                                    </div>
+                                    <div class="mb-3 animate__animated animate__fadeInUp animate-delay-10">
+                                        <strong>You Pay:</strong> <span class="fs-4 fw-bold text-success">₹1,500</span>
+                                    </div>
+                                    <a href="https://link.labdox.com/AI-SC-Pay-1" class="btn btn-primary mt-3 btn-lg pulse animate__animated animate__infinite btn-bounce animate-delay-11" target="_blank" rel="noopener">Confirm your seat</a>
+                                </div>
+                                <div class="col-md-6 animate__animated animate__zoomIn animate-delay-2">
+                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Swipe Special Offer" class="img-fluid rounded-3">
+                                </div>
+                            </div>
+                        `;
+                        break;
+                }
+                contentDiv.innerHTML = content;
+                contentDiv.classList.remove('animate__fadeOut');
+                contentDiv.classList.add('animate__fadeIn'); // Add fadeIn after content is set
+            }, 300); // Small delay to allow fadeOut to be visible
+        }
+    </script>
+    <!-- Chatbot Floating Button -->
+    <button class="chatbot-fab" id="chatbotFab" title="Chat with Labdox Bot">
+        <i class="bi bi-chat-dots"></i>
+    </button>
+    <!-- Chatbot Panel -->
+    <div class="chatbot-panel" id="chatbotPanel">
+        <div class="chatbot-header">
+            <span><i class="bi bi-robot me-2"></i>Labdox Bot</span>
+            <button class="close-btn" id="closeChatbot" aria-label="Close">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chatbot-message bot">
+                <div class="bubble">Hi! 👋 I'm your AI Camp Assistant. How can I help you today?</div>
+            </div>
+        </div>
+        <form class="chatbot-input-area" id="chatbotForm" autocomplete="off">
+            <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message..." required />
+            <button type="submit" class="chatbot-send-btn"><i class="bi bi-send"></i></button>
+        </form>
+    </div>
+    <script>
+        // Chatbot open/close logic
+        const chatbotFab = document.getElementById('chatbotFab');
+        const chatbotPanel = document.getElementById('chatbotPanel');
+        const closeChatbot = document.getElementById('closeChatbot');
+        chatbotFab.addEventListener('click', () => {
+            chatbotPanel.classList.add('open');
+        });
+        closeChatbot.addEventListener('click', () => {
+            chatbotPanel.classList.remove('open');
+        });
+        // Close on outside click
+        document.addEventListener('mousedown', function(e) {
+            if (chatbotPanel.classList.contains('open') && !chatbotPanel.contains(e.target) && !chatbotFab.contains(e.target)) {
+                chatbotPanel.classList.remove('open');
+            }
+        });
+        // Chatbot message logic
+        const chatbotForm = document.getElementById('chatbotForm');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        chatbotForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const userMsg = chatbotInput.value.trim();
+            if (!userMsg) return;
+            appendMessage('user', userMsg);
+            chatbotInput.value = '';
+            chatbotInput.focus();
+            // Show typing indicator
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'chatbot-message bot typing-indicator';
+            typingDiv.innerHTML = '<div class="bubble">Labdox Bot is typing...</div>';
+            chatbotMessages.appendChild(typingDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            // Gemini API integration
+            const botReply = await getBotReply(userMsg);
+            typingDiv.remove();
+            appendMessage('bot', botReply);
+        });
+        function appendMessage(sender, text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'chatbot-message ' + sender;
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.textContent = text;
+            msgDiv.appendChild(bubble);
+            chatbotMessages.appendChild(msgDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+        // Website context from info.txt for the chatbot
+        const websiteContext = `You are a helpful assistant for the Labdox AI + Core Human Skills Summer Camp website. Here is information about the camp:
+
+The AI + Core Human Skills Summer Camp
+In just 2 days, your child will build real projects, present with confidence, and create something they'll never forget.
+
+Why Parents and Schools Trust Labdox - 5-star rating
+Because we've trained 25,000+ learners from 90+ countries and helped many get into top careers — and it didn't happen overnight.
+Trusted by India's Top Schools & Colleges including DPS.
+
+Global Impact: 25,000+ learners across 90+ countries have been part of our programs.
+Legacy of Learning: 20+ years of experience in mentoring and career counseling.
+Real Projects, Real Results: Our students have built projects featured in competitions, interviews, and actual businesses.
+Recognized by the Best: Contributors to programs at AICTE, IITs, and global startup summits. Led by SLP-certified experts.
+
+Why Choose Our Camp:
+- Hands-on Learning: Kids build real projects they can showcase, not just watch demos.
+- Expert Mentors: Learn from industry professionals with real-world AI experience.
+- Portfolio Projects: Create work that stands out with projects they can show to schools or future employers.
+
+What They'll Learn:
+- AI Basics: Understand how AI works through fun, interactive projects like image recognition and simple chatbots.
+- Creative Coding: Build websites and simple apps without complex coding using block-based programming and AI tools.
+- Design Thinking: Solve real problems with creative solutions using the same process tech companies use.
+- Presentation Skills: Learn to showcase projects with confidence in our final demo day.
+
+Sample Projects:
+- AI Art Generator: Create stunning digital art using AI tools and learn how machine learning can be creative.
+- Personal Website: Build and publish a personal portfolio site to showcase their projects and achievements.
+- Smart Chatbot: Program a friendly AI assistant that can answer questions and have simple conversations.
+
+Pricing: Total Value ₹6,897, You Pay: ₹1,500 (Swipe Special Offer)
+This exclusive offer is only available to Swipe community members.
+
+Age Group: Ideal for ages 10-16. We group students by age and experience level. No prior coding or AI knowledge is needed.
+Format: Both online and in-person options available. In-person camps in Mumbai, Delhi, and Bangalore.
+Skills Gained: Think like a builder, solve problems creatively, present ideas confidently, build a real project portfolio.
+
+Registration is currently CLOSED. Next batch pricing will be ₹2500.`;
+
+        // Google Apps Script URL for storing data
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYITHIQhEA_c707ZFsx5IUkXaSl_cfrZz4d97U7hJc8DpwnhnXha8A7mpDXs0WyVxW/exec";
+
+        // Gemini API call
+        async function getBotReply(userMsg) {
+            const apiKey = "AIzaSyDqmItxdoHJxp9gB9I7RTEtWC7AativRAI";
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            
+            try {
+                // Create prompt with website context
+                const prompt = `${websiteContext}\n\nUser Question: ${userMsg}\n\nPlease provide a concise, direct answer (2-3 sentences maximum) about the Labdox AI Camp. If the question is about our camp, use the information above. If it's a general question, answer normally. Be brief and to the point.`;
+                
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                });
+                const data = await response.json();
+                const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't get a reply.";
+                
+                // Store the conversation in Google Sheets
+                await storeConversation(userMsg, botReply);
+                
+                return botReply;
+            } catch (err) {
+                console.error('Error getting bot reply:', err);
+                return "Sorry, there was an error connecting to Gemini.";
+            }
+        }
+
+        // Function to store conversation in Google Sheets
+        async function storeConversation(question, answer) {
+            try {
+                console.log('Attempting to store conversation:', { question, answer });
+                
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        question: question,
+                        answer: answer
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'no-cors' // Add this to handle CORS issues
+                });
+                
+                console.log('Response received:', response);
+                console.log('Data stored successfully');
+            } catch (error) {
+                console.error('Error storing data:', error);
+                // Still show the bot response even if storage fails
+            }
+        }
+    </script>
+</body>
+</html>
